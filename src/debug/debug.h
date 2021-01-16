@@ -56,6 +56,8 @@ DEBUG_LINE_INDENT(depth) put a horizontal line with indentation
     #define DEBUG_MSG_INDENT(expr, depth) debug::msg(expr, depth)
     #define DEBUG_LINE() debug::line()
     #define DEBUG_LINE_INDENT(depth) debug::line(depth)
+    #define DEBUG_ERROR(expr) debug::error(expr)
+    #define DEBUG_ERROR_INDENT(expr, depth) debug::error(expr, depth)
 
 #else
     #define STATIC_ASSERT(expr)
@@ -64,6 +66,8 @@ DEBUG_LINE_INDENT(depth) put a horizontal line with indentation
     #define DEBUG_MSG_INDENT(expr, depth) 
     #define DEBUG_LINE()
     #define DEBUG_LINE_INDENT(depth)
+    #define DEBUG_ERROR(expr) 
+    #define DEBUG_ERROR_INDENT(expr, depth) 
 #endif
 
 #include <iostream>
@@ -76,7 +80,14 @@ namespace debug {
         for (int i = 0; i < depth; i ++) {
             std::cerr << "    ";
         }
-        std::cerr << expr << std::endl;
+        std::cerr << "MSG: " << expr << std::endl;
+    }
+
+    void error(const char* expr, int depth = 0) {
+        for (int i = 0; i < depth; i ++) {
+            std::cerr << "    ";
+        }
+        std::cerr << "ERROR: " << expr << std::endl;
     }
 
     void line(int depth = 0) {
