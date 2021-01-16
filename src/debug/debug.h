@@ -1,9 +1,9 @@
 /**
  * @file debug.hpp
  * @author Daniel Hongyu Ding
- * @brief this file defines everything for debugging
- * @version 0.1
- * @date 2020-12-28
+ * @brief this file defines functions for displaying debug messages
+ * @version 0.2
+ * @date 2021-01-16
  * 
  * @copyright Copyright (c) 2020
  * 
@@ -23,6 +23,11 @@ DEBUG_LINE() put a horizontal line to standard error
 
 DEBUG_LINE_INDENT(depth) put a horizontal line with indentation
     based on depth to standard error
+
+DEBUG_ERROR(expr) put expr to standard error
+
+DEBUG_ERROR_INDENT(expr, depth) put expr with indentation based on depth
+    to standard error
 */
 
 #ifndef DEBUG_H
