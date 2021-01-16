@@ -1,5 +1,4 @@
-#include "./src/core/utilities/jobSystem.h"
-#include "./src/core/utilities/includes.h"
+#include "REngine.h"
 
 struct Timer {
     std::string name;
@@ -49,7 +48,8 @@ int main() {
 
         JobSystem::sync();
     }
-    std::cout << "done" << std::endl;
+    std::cout << "done" << glm::sin(3.14) << std::endl;
+
 
     JobSystem::destroy();
 

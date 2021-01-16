@@ -14,6 +14,4 @@
 
 #include <glm/glm.hpp>
 
-using namespace glm;
-
 #endif

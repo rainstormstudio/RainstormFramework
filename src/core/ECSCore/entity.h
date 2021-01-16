@@ -12,7 +12,7 @@
 #ifndef RS_ENTITY_H
 #define RS_ENTITY_H
 
-#include "../utilities/includes.h"
+#include "../../utilities/includes.h"
 #include <atomic>
 
 namespace ECS {
