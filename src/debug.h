@@ -25,7 +25,10 @@ DEBUG_LINE_INDENT(depth) put a horizontal line with indentation
     based on depth to standard error
 */
 
-#if DEBUG_ENABLED
+#ifndef DEBUG_H
+#define DEBUG_H
+
+#ifdef DEBUG_ENABLED
 
     #ifdef __cplusplus
         #if __cplusplus >= 201103L
@@ -45,14 +48,14 @@ DEBUG_LINE_INDENT(depth) put a horizontal line with indentation
     #define ASSERT(expr) \
     if (expr) {}  \
     else {  \
-        Debug::msg(#expr, __FILE__, __LINE__);  \
+        debug::msg(#expr, __FILE__, __LINE__);  \
         debugbreak(); \
     }
 
-    #define DEBUG_MSG(expr) Debug::msg(expr)
-    #define DEBUG_MSG_INDENT(expr, depth) Debug::msg(expr, depth)
-    #define DEBUG_LINE() Debug::line()
-    #define DEBUG_LINE_INDENT(depth) Debug::line(depth)
+    #define DEBUG_MSG(expr) debug::msg(expr)
+    #define DEBUG_MSG_INDENT(expr, depth) debug::msg(expr, depth)
+    #define DEBUG_LINE() debug::line()
+    #define DEBUG_LINE_INDENT(depth) debug::line(depth)
 
 #else
     #define STATIC_ASSERT(expr)
@@ -64,7 +67,7 @@ DEBUG_LINE_INDENT(depth) put a horizontal line with indentation
 #endif
 
 #include <iostream>
-namespace Debug {
+namespace debug {
     void msg(const char* expr, const char* file, int line) {
         std::cerr << "[" << file << "] at line " << line << ": " << expr << std::endl; 
     }
@@ -86,3 +89,5 @@ namespace Debug {
         std::cerr << std::endl;
     }
 };
+
+#endif
