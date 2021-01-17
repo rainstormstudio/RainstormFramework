@@ -75,35 +75,14 @@ DEBUG_ERROR_INDENT(expr, depth) put expr with indentation based on depth
     #define DEBUG_ERROR_INDENT(expr, depth) 
 #endif
 
-#include <iostream>
 namespace debug {
-    void msg(const char* expr, const char* file, int line) {
-        std::cerr << "[" << file << "] at line " << line << ": " << expr << std::endl; 
-    }
+    void msg(const char* expr, const char* file, int line);
 
-    void msg(const char* expr, int depth = 0) {
-        for (int i = 0; i < depth; i ++) {
-            std::cerr << "    ";
-        }
-        std::cerr << "MSG: " << expr << std::endl;
-    }
+    void msg(const char* expr, int depth = 0);
 
-    void error(const char* expr, int depth = 0) {
-        for (int i = 0; i < depth; i ++) {
-            std::cerr << "    ";
-        }
-        std::cerr << "ERROR: " << expr << std::endl;
-    }
+    void error(const char* expr, int depth = 0);
 
-    void line(int depth = 0) {
-        for (int i = 0; i < depth; i ++) {
-            std::cerr << "    ";
-        }
-        for (int i = 0; i < 80 - depth * 4; i ++) {
-            std::cerr << "-";
-        }
-        std::cerr << std::endl;
-    }
-};
+    void line(int depth = 0);
+}
 
 #endif

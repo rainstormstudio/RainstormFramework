@@ -6,7 +6,7 @@
 #include <mutex>
 #include <condition_variable>
 
-namespace JobSystem {
+namespace jobsystem {
     uint32_t nThreads = 0;
     RingBuffer<std::function<void()>, 256> taskPool;
     std::condition_variable wakeCondition;

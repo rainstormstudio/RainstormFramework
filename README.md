@@ -17,9 +17,6 @@
 - functions, variables start with a lowercase letter
 - namespaces are all lowercase
 - enum values or constants are all uppercase using underscore to separate words
-- interfaces have a `Interface` suffix
-- abstract base classes have an `Abstract` prefix
-- member variables have a trailing underscore
 - accessors for a variable `foo_` are named `foo()` and `setFoo()`
 - global variables have a `g_` prefix
 - static class variables have a `s_` prefix

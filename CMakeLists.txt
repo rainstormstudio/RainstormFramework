@@ -18,8 +18,8 @@ if(UNIX)
     )
 endif()
 
-file(GLOB_RECURSE SRC_CPP_FILES "./src/*.cpp")
-file(GLOB_RECURSE HEADER_FILES "./src/*.h")
+file(GLOB_RECURSE SRC_CPP_FILES "src/*.cpp")
+file(GLOB_RECURSE HEADER_FILES "src/*.h")
 
 add_executable(
     ${PROJECT_NAME}

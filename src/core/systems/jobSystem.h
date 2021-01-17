@@ -16,7 +16,7 @@
 #include <functional>
 #include <atomic>
 
-namespace JobSystem {
+namespace jobsystem {
     /**
      * @brief initialize the job system
      * 

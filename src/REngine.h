@@ -14,11 +14,13 @@
 
 // Utilities
 #include "./utilities/includes.h"
+#include "./utilities/utility.h"
 
 // Math
 #include "./math/math.h"
 
 // Core
+#include "./core/engine.h"
 
 // ECS Core
 #include "./core/ECSCore/entity.h"
