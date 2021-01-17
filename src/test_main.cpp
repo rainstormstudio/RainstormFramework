@@ -1,5 +1,3 @@
-#define DEBUG_ENABLED
-
 #include "REngine.h"
 
 class App : public Engine {
@@ -20,8 +18,9 @@ public:
 int main() {
 
     App app;
-    app.initialize();
-    app.run();
+    if (app.initialize()) {
+        app.run();
+    }
 
     return 0;
 }

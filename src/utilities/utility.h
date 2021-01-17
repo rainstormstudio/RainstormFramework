@@ -32,7 +32,13 @@ namespace utility {
 
     inline std::string toLower(const std::string& str) {
         std::string ans = "";
-        std::transform(str.begin(), str.end(), ans.begin(), ::tolower);
+        for (auto ch : str) {
+            if (ch >= 'A' && ch <= 'Z') {
+                ans += ch - 'A' + 'a';
+            } else {
+                ans += ch;
+            }
+        }
         return ans;
     }
 }

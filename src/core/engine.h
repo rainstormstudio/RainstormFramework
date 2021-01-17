@@ -29,14 +29,10 @@ public:
     // must calls
     bool initialize();
 
-    void destroy();
-    
     void run();
 
-public:
-    void update();
-
-    void render();
+private:
+    void destroy();
 
     void gameLoop();
 };

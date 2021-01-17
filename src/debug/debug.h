@@ -33,7 +33,9 @@ DEBUG_ERROR_INDENT(expr, depth) put expr with indentation based on depth
 #ifndef DEBUG_H
 #define DEBUG_H
 
-#ifdef DEBUG_ENABLED
+#include <string>
+
+#ifndef NDEBUG
 
     #ifdef __cplusplus
         #if __cplusplus >= 201103L
@@ -61,6 +63,8 @@ DEBUG_ERROR_INDENT(expr, depth) put expr with indentation based on depth
     #define DEBUG_MSG_INDENT(expr, depth) debug::msg(expr, depth)
     #define DEBUG_LINE() debug::line()
     #define DEBUG_LINE_INDENT(depth) debug::line(depth)
+    #define DEBUG_DLINE() debug::line(0, '=')
+    #define DEBUG_DLINE_INDENT(depth) debug::line(depth, '=')
     #define DEBUG_ERROR(expr) debug::error(expr)
     #define DEBUG_ERROR_INDENT(expr, depth) debug::error(expr, depth)
 
@@ -69,6 +73,8 @@ DEBUG_ERROR_INDENT(expr, depth) put expr with indentation based on depth
     #define ASSERT(expr) 
     #define DEBUG_MSG(expr) 
     #define DEBUG_MSG_INDENT(expr, depth) 
+    #define DEBUG_DLINE() 
+    #define DEBUG_DLINE_INDENT(depth) 
     #define DEBUG_LINE()
     #define DEBUG_LINE_INDENT(depth)
     #define DEBUG_ERROR(expr) 
@@ -78,11 +84,15 @@ DEBUG_ERROR_INDENT(expr, depth) put expr with indentation based on depth
 namespace debug {
     void msg(const char* expr, const char* file, int line);
 
+    void msg(std::string expr, int depth = 0);
+
     void msg(const char* expr, int depth = 0);
+
+    void error(std::string expr, int depth = 0);
 
     void error(const char* expr, int depth = 0);
 
-    void line(int depth = 0);
+    void line(int depth = 0, char ch = '-');
 }
 
 #endif

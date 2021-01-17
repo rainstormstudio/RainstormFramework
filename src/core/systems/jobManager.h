@@ -10,13 +10,13 @@
  * 
  */
 
-#ifndef RS_JOB_SYSTEM_H
-#define RS_JOB_SYSTEM_H
+#ifndef RS_JOB_MANAGER_H
+#define RS_JOB_MANAGER_H
 
 #include <functional>
 #include <atomic>
 
-namespace jobsystem {
+namespace jobManager {
     /**
      * @brief initialize the job system
      * 

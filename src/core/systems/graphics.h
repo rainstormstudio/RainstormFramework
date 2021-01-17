@@ -29,6 +29,6 @@ namespace graphics {
     void renderBuffer();
 
     bool windowShouldClose();
-}
+};
 
 #endif

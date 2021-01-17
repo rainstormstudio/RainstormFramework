@@ -1,4 +1,4 @@
-#include "jobSystem.h"
+#include "jobManager.h"
 #include "../containers/ringBuffer.h"
 #include "../../utilities/includes.h"
 #include <thread>
@@ -6,7 +6,7 @@
 #include <mutex>
 #include <condition_variable>
 
-namespace jobsystem {
+namespace jobManager {
     uint32_t nThreads = 0;
     RingBuffer<std::function<void()>, 256> taskPool;
     std::condition_variable wakeCondition;

@@ -13,6 +13,7 @@
 #define CONFIG_SYSTEM_H
 
 #include "../../utilities/includes.h"
+#include "../../error/error.h"
 
 namespace config {
     extern std::string configFilePath;
@@ -20,7 +21,7 @@ namespace config {
     extern uint32_t screenWidth;
     extern uint32_t screenHeight;
 
-    void initialize();
+    Error initialize();
 
     void destroy();
 }
