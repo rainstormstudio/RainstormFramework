@@ -4,9 +4,9 @@
  * @brief The highest interface for user
  * @version 0.1
  * @date 2021-01-16
- * 
+ *
  * @copyright Copyright (c) 2021
- * 
+ *
  */
 
 #ifndef RAINSTORM_ENGINE_H
@@ -22,9 +22,11 @@
 // Core
 #include "./core/engine.h"
 
-// ECS Core
-#include "./core/ECSCore/entity.h"
-#include "./core/ECSCore/componentManager.h"
+// Entity Component related
+#include "./components/componentList.h"
+#include "./core/ECcore/component.h"
+#include "./core/ECcore/ecManager.h"
+#include "./core/ECcore/entity.h"
 
 // systems
 #include "./core/systems/jobManager.h"

@@ -20,14 +20,16 @@ GLFWwindow *window = nullptr;
 uint32_t screenWidth = 800;
 uint32_t screenHeight = 600;
 std::string windowTitle = "REngine";
+bool showFPS = true;
 
 Error initialize() {
     DEBUG_MSG("Initializing Graphics");
     screenWidth = config::screenWidth;
     screenHeight = config::screenHeight;
+    showFPS = config::showFPS;
 
     if (!glfwInit()) {
-        DEBUG_ERROR("Failed to initialize GLFW");
+        DEBUG_ERROR_INDENT("Failed to initialize GLFW", 1);
         return Error::FAIL;
     }
 
@@ -41,14 +43,14 @@ Error initialize() {
     window = glfwCreateWindow(screenWidth, screenHeight, windowTitle.c_str(),
                               nullptr, nullptr);
     if (!window) {
-        DEBUG_ERROR("Failed to create GLFW window");
+        DEBUG_ERROR_INDENT("Failed to create GLFW window", 1);
         glfwTerminate();
         return Error::FAIL;
     }
     glfwMakeContextCurrent(window);
 
     if (glewInit() != GLEW_OK) {
-        DEBUG_ERROR("Failed to initialize GLEW");
+        DEBUG_ERROR_INDENT("Failed to initialize GLEW", 1);
         glfwDestroyWindow(window);
         glfwTerminate();
         return Error::FAIL;
@@ -62,7 +64,7 @@ Error initialize() {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glfwSwapInterval(1);
 
-    DEBUG_MSG("window constructed");
+    DEBUG_MSG("Graphics initialized");
 
     return Error::OK;
 }

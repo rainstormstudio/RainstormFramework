@@ -4,34 +4,39 @@
  * @brief the core of the engine
  * @version 0.1
  * @date 2021-01-16
- * 
+ *
  * @copyright Copyright (c) 2021
- * 
+ *
  */
 #ifndef ENGINE_H
 #define ENGINE_H
 
+class ECManager;
+
 class Engine {
     bool isRunning;
 
-public:
+   public:
     Engine();
     virtual ~Engine();
 
-public:
+   public:
     // interfaces
     virtual bool onCreate() = 0;
     virtual bool onUpdate(double deltaTime) = 0;
     virtual bool onRender(double deltaTime) = 0;
     virtual bool onDestroy();
 
-public:
+   public:
     // must calls
     bool initialize();
 
     void run();
 
-private:
+   public:
+    ECManager* manager;
+
+   private:
     void destroy();
 
     void gameLoop();
