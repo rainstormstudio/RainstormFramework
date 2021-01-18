@@ -3,15 +3,15 @@
 class App : public Engine {
    public:
     bool onCreate() override {
-        Entity* camera = manager->addEntity("mainCamera", 0);
+        Object* camera = manager->addObject("mainCamera", 0);
         {
             camera->addComponent<Transform>();
             camera->addComponent<Camera>();
         }
 
-        Entity* obj = manager->addEntity("cube", 1);
+        Object* obj = manager->addObject("cube", 1);
         {
-            obj->addComponent<Transform>(glm::vec3(0, 0, -10));
+            obj->addComponent<Transform>(glm::vec3(-1, 0, -5));
             obj->addComponent<Mesh>(Mesh::CUBE);
         }
 

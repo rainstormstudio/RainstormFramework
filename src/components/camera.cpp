@@ -3,7 +3,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "../core/ECcore/entity.h"
+#include "../core/OCcore/object.h"
 #include "../core/systems/graphics.h"
 #include "../debug/debug.h"
 #include "transform.h"

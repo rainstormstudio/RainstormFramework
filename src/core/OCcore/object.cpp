@@ -1,44 +1,44 @@
-#include "entity.h"
+#include "object.h"
 
 #include "../../debug/debug.h"
 #include "component.h"
-#include "ecManager.h"
+#include "ocManager.h"
 
-Entity::Entity(ECManager& manager, std::string name, uint8_t layer)
+Object::Object(OCManager& manager, std::string name, uint8_t layer)
     : manager{manager}, name{name}, layer{layer} {
     isActive_ = true;
-    DEBUG_MSG("entity: " + name + " created");
+    DEBUG_MSG("object: " + name + " created");
 }
 
-Entity::~Entity() {
+Object::~Object() {
     for (size_t i = 0; i < components.size(); i++) {
         delete components[i];
         components[i] = nullptr;
         components.erase(components.begin() + i);
         i--;
     }
-    DEBUG_MSG("entity: " + name + " deleted");
+    DEBUG_MSG("object: " + name + " deleted");
     DEBUG_LINE();
 }
 
-void Entity::initialize() {
+void Object::initialize() {
     for (size_t i = 0; i < components.size(); i++) {
         components[i]->initialize();
     }
 }
 
-void Entity::update(double deltaTime) {
+void Object::update(double deltaTime) {
     for (size_t i = 0; i < components.size(); i++) {
         components[i]->update(deltaTime);
     }
 }
 
-void Entity::render(double deltaTime) {
+void Object::render(double deltaTime) {
     for (size_t i = 0; i < components.size(); i++) {
         components[i]->render(deltaTime);
     }
 }
 
-bool Entity::isActive() const { return isActive_; }
+bool Object::isActive() const { return isActive_; }
 
-void Entity::destroy() { isActive_ = false; }
+void Object::destroy() { isActive_ = false; }

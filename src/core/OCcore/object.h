@@ -1,7 +1,7 @@
 /**
  * @file entity.h
  * @author Daniel Hongyu Ding
- * @brief This file defines entity
+ * @brief This file defines object
  * @version 0.1
  * @date 2021-01-17
  *
@@ -15,22 +15,22 @@
 #include "../../utilities/includes.h"
 
 class Component;
-class ECManager;
+class OCManager;
 
-class Entity {
+class Object {
     bool isActive_;
     std::map<const std::type_info*, Component*> componentTypes;
 
    public:
-    ECManager& manager;
+    OCManager& manager;
 
     std::vector<Component*> components;
     std::string name;
     uint8_t layer;
 
-    Entity(ECManager& manager, std::string name, uint8_t layer);
+    Object(OCManager& manager, std::string name, uint8_t layer);
 
-    ~Entity();
+    ~Object();
 
     void initialize();
     void update(double deltaTime);

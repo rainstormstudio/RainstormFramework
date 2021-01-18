@@ -11,7 +11,7 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-class ECManager;
+class OCManager;
 
 class Engine {
     bool isRunning;
@@ -34,7 +34,7 @@ class Engine {
     void run();
 
    public:
-    ECManager* manager;
+    OCManager* manager;
 
    private:
     void destroy();

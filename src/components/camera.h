@@ -16,7 +16,7 @@
 
 #include <glm/glm.hpp>
 
-#include "../core/ECcore/component.h"
+#include "../core/OCcore/component.h"
 
 class Camera : public Component {
     glm::vec3 front;

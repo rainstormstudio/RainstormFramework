@@ -1,7 +1,7 @@
 #include "engine.h"
 
 #include "../debug/debug.h"
-#include "./ECcore/ecManager.h"
+#include "./OCcore/ocManager.h"
 #include "./systems/configSystem.h"
 #include "./systems/graphics.h"
 #include "./systems/jobManager.h"
@@ -23,7 +23,7 @@ bool Engine::initialize() {
         return false;
     }
 
-    manager = new ECManager();
+    manager = new OCManager();
 
     isRunning = false;
 

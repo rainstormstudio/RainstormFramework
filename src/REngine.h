@@ -24,9 +24,9 @@
 
 // Entity Component related
 #include "./components/componentList.h"
-#include "./core/ECcore/component.h"
-#include "./core/ECcore/ecManager.h"
-#include "./core/ECcore/entity.h"
+#include "./core/OCcore/component.h"
+#include "./core/OCcore/object.h"
+#include "./core/OCcore/ocManager.h"
 
 // component list
 #include "./components/componentList.h"

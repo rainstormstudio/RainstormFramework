@@ -12,11 +12,11 @@
 #ifndef RS_COMPONENT_H
 #define RS_COMPONENT_H
 
-class Entity;
+class Object;
 
 class Component {
    public:
-    Entity* owner;
+    Object* owner;
 
     virtual void initialize() = 0;
     virtual void update(double deltaTime) = 0;
