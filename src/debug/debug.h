@@ -30,8 +30,8 @@ DEBUG_ERROR_INDENT(expr, depth) put expr with indentation based on depth
     to standard error
 */
 
-#ifndef DEBUG_H
-#define DEBUG_H
+#ifndef RS_DEBUG_H
+#define RS_DEBUG_H
 
 #include <string>
 

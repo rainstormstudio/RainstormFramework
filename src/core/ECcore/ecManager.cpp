@@ -30,6 +30,20 @@ void ECManager::destroyByLayer(uint8_t layer) {
     layers.erase(layer);
 }
 
+void ECManager::initialize() {
+    for (auto layer : layers) {
+        for (auto& entity : getEntitiesByLayer(layer)) {
+            entity->initialize();
+        }
+    }
+}
+
+void ECManager::initializeByLayer(uint8_t layer) {
+    for (auto& entity : getEntitiesByLayer(layer)) {
+        entity->initialize();
+    }
+}
+
 void ECManager::update(double deltaTime) {
     for (auto layer : layers) {
         for (auto& entity : getEntitiesByLayer(layer)) {

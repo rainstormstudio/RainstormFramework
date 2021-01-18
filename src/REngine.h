@@ -28,6 +28,9 @@
 #include "./core/ECcore/ecManager.h"
 #include "./core/ECcore/entity.h"
 
+// component list
+#include "./components/componentList.h"
+
 // systems
 #include "./core/systems/jobManager.h"
 

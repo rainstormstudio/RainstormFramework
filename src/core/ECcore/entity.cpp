@@ -21,6 +21,12 @@ Entity::~Entity() {
     DEBUG_LINE();
 }
 
+void Entity::initialize() {
+    for (size_t i = 0; i < components.size(); i++) {
+        components[i]->initialize();
+    }
+}
+
 void Entity::update(double deltaTime) {
     for (size_t i = 0; i < components.size(); i++) {
         components[i]->update(deltaTime);

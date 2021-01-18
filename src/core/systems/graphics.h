@@ -15,6 +15,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include <glm/glm.hpp>
+
 #include "../../error/error.h"
 #include "../../math/math.h"
 #include "../../utilities/includes.h"
@@ -30,6 +32,16 @@ void clearBuffer();
 void renderBuffer();
 
 bool windowShouldClose();
+
+uint32_t screenWidth();
+uint32_t screenHeight();
+
+void useShader(size_t index = 0);
+void unbindShader();
+
+void applyModel(glm::mat4 model);
+void applyProjection(glm::mat4 projection);
+void applyView(glm::mat4 view);
 
 };  // namespace graphics
 

@@ -55,6 +55,8 @@ void Engine::gameLoop() {
         isRunning = false;
     }
 
+    manager->initialize();
+
     double deltaTime = 0.0;
     double time_a = glfwGetTime();
     double time_b = glfwGetTime();
@@ -79,10 +81,13 @@ void Engine::gameLoop() {
             }
 
             graphics::clearBuffer();
+            graphics::useShader(0);
 
             if (!onRender(0)) {
                 isRunning = false;
             }
+
+            graphics::unbindShader();
 
             graphics::renderBuffer();
         }

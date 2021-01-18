@@ -32,6 +32,7 @@ class Entity {
 
     ~Entity();
 
+    void initialize();
     void update(double deltaTime);
     void render(double deltaTime);
 
@@ -44,7 +45,7 @@ class Entity {
         component->owner = this;
         components.emplace_back(component);
         componentTypes[&typeid(*component)] = component;
-        component->init();
+        component->initialize();
         return *component;
     }
 

@@ -12,6 +12,7 @@
 #ifndef RS_UTILITY_H
 #define RS_UTILITY_H
 
+#include "../debug/debug.h"
 #include "includes.h"
 
 namespace utility {
@@ -50,6 +51,8 @@ inline bool toBool(const std::string& str) {
     std::string ans = toLower(str);
     return (ans == "t" || ans == "true");
 }
+
+std::string readFile(const char* filePath);
 
 }  // namespace utility
 

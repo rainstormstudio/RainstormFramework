@@ -29,6 +29,8 @@ class ECManager {
     void destroy();
     void destroyByLayer(uint8_t layer);
 
+    void initialize();
+    void initializeByLayer(uint8_t layer);
     void update(double deltaTime);
     void updateByLayer(double deltaTime, uint8_t layer);
     void render(double deltaTime);

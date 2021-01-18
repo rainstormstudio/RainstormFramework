@@ -1,7 +1,10 @@
 #include "graphics.h"
 
+#include <glm/gtc/type_ptr.hpp>
+
 #include "../../debug/debug.h"
 #include "configSystem.h"
+#include "shader.h"
 
 // callbacks
 void glfwErrorCallback(int error, const char *description) {
@@ -17,15 +20,18 @@ namespace graphics {
 
 GLFWwindow *window = nullptr;
 
-uint32_t screenWidth = 800;
-uint32_t screenHeight = 600;
+uint32_t screenWidth_ = 800;
+uint32_t screenHeight_ = 600;
 std::string windowTitle = "REngine";
 bool showFPS = true;
 
+std::vector<Shader *> shaderList;
+size_t currentShaderIndex;
+
 Error initialize() {
     DEBUG_MSG("Initializing Graphics");
-    screenWidth = config::screenWidth;
-    screenHeight = config::screenHeight;
+    screenWidth_ = config::screenWidth;
+    screenHeight_ = config::screenHeight;
     showFPS = config::showFPS;
 
     if (!glfwInit()) {
@@ -40,7 +46,7 @@ Error initialize() {
 
     glfwSetErrorCallback(glfwErrorCallback);
 
-    window = glfwCreateWindow(screenWidth, screenHeight, windowTitle.c_str(),
+    window = glfwCreateWindow(screenWidth_, screenHeight_, windowTitle.c_str(),
                               nullptr, nullptr);
     if (!window) {
         DEBUG_ERROR_INDENT("Failed to create GLFW window", 1);
@@ -56,7 +62,7 @@ Error initialize() {
         return Error::FAIL;
     }
 
-    glViewport(0, 0, screenWidth, screenHeight);
+    glViewport(0, 0, screenWidth_, screenHeight_);
     glfwSetFramebufferSizeCallback(window, glfwFramebufferSizeCallback);
 
     glClearColor(0.0, 0.0, 0.0, 1.0);
@@ -64,20 +70,62 @@ Error initialize() {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glfwSwapInterval(1);
 
+    DEBUG_MSG_INDENT("window constructed", 1);
+
+    Shader *shader = new Shader();
+    shader->createFromFiles(config::vShaderPath.c_str(),
+                            config::fShaderPath.c_str());
+    shaderList.emplace_back(shader);
+    currentShaderIndex = 0;
+
     DEBUG_MSG("Graphics initialized");
 
     return Error::OK;
 }
 
 void destroy() {
+    for (size_t i = 0; i < shaderList.size(); i++) {
+        delete shaderList[i];
+        shaderList[i] = nullptr;
+        shaderList.erase(shaderList.begin() + i);
+        i--;
+    }
     glfwDestroyWindow(window);
     glfwTerminate();
 }
 
-void clearBuffer() { glClear(GL_COLOR_BUFFER_BIT); }
+void clearBuffer() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
+
+void useShader(size_t index) {
+    if (0 <= index && index < shaderList.size()) {
+        currentShaderIndex = index;
+    }
+    shaderList[currentShaderIndex]->use();
+}
+
+void unbindShader() { glUseProgram(0); }
 
 void renderBuffer() { glfwSwapBuffers(window); }
 
 bool windowShouldClose() { return glfwWindowShouldClose(window); }
+
+uint32_t screenWidth() { return screenWidth_; }
+
+uint32_t screenHeight() { return screenHeight_; }
+
+void applyModel(glm::mat4 model) {
+    glUniformMatrix4fv(shaderList[currentShaderIndex]->uniformModel(), 1,
+                       GL_FALSE, glm::value_ptr(model));
+}
+
+void applyProjection(glm::mat4 projection) {
+    glUniformMatrix4fv(shaderList[currentShaderIndex]->uniformProjection(), 1,
+                       GL_FALSE, glm::value_ptr(projection));
+}
+
+void applyView(glm::mat4 view) {
+    glUniformMatrix4fv(shaderList[currentShaderIndex]->uniformView(), 1,
+                       GL_FALSE, glm::value_ptr(view));
+}
 
 }  // namespace graphics

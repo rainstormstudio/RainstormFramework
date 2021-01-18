@@ -5,6 +5,8 @@
 
 namespace config {
 std::string configFilePath = "./config/settings.cfg";
+std::string vShaderPath = "./shaders/vertex.glsl";
+std::string fShaderPath = "./shaders/fragment.glsl";
 
 uint32_t screenWidth = 800;
 uint32_t screenHeight = 600;
@@ -49,6 +51,10 @@ Error initialize() {
                 screenHeight = std::stoi(value);
             } else if (tag == "showfps") {
                 showFPS = utility::toBool(value);
+            } else if (tag == "vshader") {
+                vShaderPath = value;
+            } else if (tag == "fshader") {
+                fShaderPath = value;
             }
         }
 
