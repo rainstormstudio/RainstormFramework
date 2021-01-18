@@ -28,12 +28,12 @@ class Transform : public Component {
 
     Transform() {
         transform = glm::vec3(0.0f, 0.0f, 0.0f);
-        scale = glm::vec3(0.0f, 0.0f, 0.0f);
+        scale = glm::vec3(1.0f, 1.0f, 1.0f);
         rotate = glm::vec3(0.0f, 0.0f, 0.0f);
     }
 
     Transform(glm::vec3 transform) : transform{transform} {
-        scale = glm::vec3(0.0f, 0.0f, 0.0f);
+        scale = glm::vec3(1.0f, 1.0f, 1.0f);
         rotate = glm::vec3(0.0f, 0.0f, 0.0f);
     }
 

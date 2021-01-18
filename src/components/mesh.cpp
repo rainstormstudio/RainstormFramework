@@ -2,6 +2,7 @@
 
 #include "../core/ECcore/entity.h"
 #include "../core/systems/graphics.h"
+#include "../debug/debug.h"
 #include "transform.h"
 
 Mesh::Mesh(Shape shape, size_t shaderIndex) : shaderIndex{shaderIndex} {
@@ -12,6 +13,17 @@ Mesh::Mesh(Shape shape, size_t shaderIndex) : shaderIndex{shaderIndex} {
 
     switch (shape) {
         case Shape::NONE: {
+            break;
+        }
+        case Shape::PLANE: {
+            GLuint nPlaneIndices = 6;
+            GLuint planeIndices[6] = {0, 1, 2, 2, 3, 0};
+            GLuint nPlaneVertices = 12;
+            GLfloat planeVertices[12] = {-1.0f, 1.0f,  0.0f,  1.0f,
+                                         1.0f,  0.0f,  1.0f,  -1.0f,
+                                         0.0f,  -1.0f, -1.0f, 0.0f};
+            createMesh(planeVertices, planeIndices, nPlaneVertices,
+                       nPlaneIndices);
             break;
         }
         case Shape::CUBE: {
@@ -58,7 +70,7 @@ void Mesh::createMesh(GLfloat *vertices, GLuint *indices, GLuint nVertices,
 }
 
 void Mesh::render(double deltaTime) {
-    // graphics::useShader(shaderIndex);
+    DEBUG_MSG_INDENT("mesh component render", 1);
 
     Transform *transform = owner->getComponent<Transform>();
     graphics::applyModel(transform->getModel());

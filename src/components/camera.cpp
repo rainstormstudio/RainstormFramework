@@ -5,6 +5,7 @@
 
 #include "../core/ECcore/entity.h"
 #include "../core/systems/graphics.h"
+#include "../debug/debug.h"
 #include "transform.h"
 
 Camera::Camera() {
@@ -34,6 +35,7 @@ Camera::Camera(glm::vec3 worldUp, GLfloat yaw, GLfloat pitch, GLfloat moveSpeed,
 }
 
 void Camera::update(double deltaTime) {
+    DEBUG_MSG_INDENT("camera component update", 1);
     front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
     front.y = sin(glm::radians(pitch));
     front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
@@ -53,6 +55,7 @@ glm::mat4 Camera::getProjection() {
 }
 
 void Camera::render(double deltaTime) {
+    DEBUG_MSG_INDENT("camera component render", 1);
     graphics::applyProjection(getProjection());
     graphics::applyView(getView());
 }

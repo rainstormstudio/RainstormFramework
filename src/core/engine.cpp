@@ -50,7 +50,6 @@ void Engine::run() {
 }
 
 void Engine::gameLoop() {
-    DEBUG_MSG("gameLoop starts");
     if (!onCreate()) {
         isRunning = false;
     }
@@ -60,6 +59,8 @@ void Engine::gameLoop() {
     double deltaTime = 0.0;
     double time_a = glfwGetTime();
     double time_b = glfwGetTime();
+
+    DEBUG_MSG("gameLoop starts");
 
     while (isRunning) {
         while (isRunning) {
@@ -76,20 +77,21 @@ void Engine::gameLoop() {
                 isRunning = false;
             }
 
-            if (!onUpdate(0)) {
+            if (!onUpdate(deltaTime)) {
                 isRunning = false;
             }
 
             graphics::clearBuffer();
             graphics::useShader(0);
 
-            if (!onRender(0)) {
+            if (!onRender(deltaTime)) {
                 isRunning = false;
             }
 
             graphics::unbindShader();
 
             graphics::renderBuffer();
+            DEBUG_DLINE();
         }
 
         if (!onDestroy()) {
