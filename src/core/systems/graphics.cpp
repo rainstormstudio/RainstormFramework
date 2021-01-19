@@ -43,6 +43,9 @@ Error initialize() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    if (config::msaa) {
+        glfwWindowHint(GLFW_SAMPLES, config::msaa);
+    }
 
     glfwSetErrorCallback(glfwErrorCallback);
 
@@ -65,6 +68,10 @@ Error initialize() {
     }
 
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+    if (config::msaa) {
+        glEnable(GL_MULTISAMPLE);
+    }
 
     glViewport(0, 0, screenWidth_, screenHeight_);
     glfwSetFramebufferSizeCallback(window, glfwFramebufferSizeCallback);

@@ -26,13 +26,13 @@ Mesh::Mesh(Shape shape, size_t shaderIndex) : shaderIndex{shaderIndex} {
             GLuint nPlaneVertices = 32;
             GLfloat planeVertices[32] = {
                 // x y z,           u v,        nx ny nz
-                -1.0f, 1.0f,  0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f,
+                -1.0f, 0.0f, 1.0f,  0.0f, 1.0f, 0.0f, 0.0f, 0.0f,
 
-                1.0f,  1.0f,  0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f,
+                1.0f,  0.0f, 1.0f,  1.0f, 1.0f, 0.0f, 0.0f, 0.0f,
 
-                1.0f,  -1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+                1.0f,  0.0f, -1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
 
-                -1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+                -1.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
 
             calculateNormals(planeVertices, planeIndices, nPlaneVertices,
                              nPlaneIndices);
@@ -43,29 +43,29 @@ Mesh::Mesh(Shape shape, size_t shaderIndex) : shaderIndex{shaderIndex} {
         case Shape::CUBE: {
             // cube
             GLuint nCubeIndices = 36;
-            GLuint cubeIndices[36] = {0,  1,  2,
+            GLuint cubeIndices[36] = {2,  1,  0,
 
-                                      2,  1,  3,
+                                      3,  1,  2,
 
-                                      6,  7,  5,
+                                      5,  7,  6,
 
-                                      5,  4,  6,
+                                      6,  4,  5,
 
-                                      9,  15, 11,
+                                      11, 15, 9,
 
-                                      9,  13, 15,
+                                      15, 13, 9,
 
-                                      8,  10, 14,
+                                      14, 10, 8,
 
-                                      8,  14, 12,
+                                      12, 14, 8,
 
-                                      20, 17, 16,
+                                      16, 17, 20,
 
-                                      20, 21, 17,
+                                      17, 21, 20,
 
-                                      19, 23, 22,
+                                      22, 23, 19,
 
-                                      19, 22, 18};
+                                      18, 22, 19};
             GLuint nCubeVertices = 192;
             GLfloat cubeVertices[192] = {
                 // x y z,         u v,        nx ny nz
@@ -138,7 +138,7 @@ void Mesh::calculateNormals(GLfloat *vertices, GLuint *indices,
         glm::vec3 v2(vertices[in2 + 0] - vertices[in0 + 0],
                      vertices[in2 + 1] - vertices[in0 + 1],
                      vertices[in2 + 2] - vertices[in0 + 2]);
-        glm::vec3 normal = -cross(v1, v2);
+        glm::vec3 normal = cross(v1, v2);
         normal = glm::normalize(normal);
 
         in0 += normalOffset;

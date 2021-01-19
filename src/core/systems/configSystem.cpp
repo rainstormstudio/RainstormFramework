@@ -11,6 +11,7 @@ std::string fShaderPath = "./shaders/fragment.glsl";
 uint32_t screenWidth = 800;
 uint32_t screenHeight = 600;
 bool showFPS = true;
+uint8_t msaa = 0;
 
 Error initialize() {
     DEBUG_MSG("Initializing Configuration");
@@ -55,6 +56,8 @@ Error initialize() {
                 vShaderPath = value;
             } else if (tag == "fshader") {
                 fShaderPath = value;
+            } else if (tag == "msaa" && utility::isNat(value)) {
+                msaa = std::stoi(value);
             }
         }
 

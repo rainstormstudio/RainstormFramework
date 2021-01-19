@@ -24,6 +24,7 @@ extern std::string fShaderPath;
 extern uint32_t screenWidth;
 extern uint32_t screenHeight;
 extern bool showFPS;
+extern uint8_t msaa;
 
 Error initialize();
 

@@ -12,7 +12,7 @@ class App : public Engine {
             camera->addComponent<Control>(5.0);
         }
 
-        for (int i = 0; i < 200; i++) {
+        for (int i = 0; i < 3000; i++) {
             Object* obj = manager->addObject("cube" + std::to_string(i), 1);
             {
                 obj->addComponent<Transform>(glm::ballRand(50.0f));
@@ -23,8 +23,7 @@ class App : public Engine {
         Object* obj = manager->addObject("plane", 1);
         {
             obj->addComponent<Transform>(glm::vec3(0, -1.1, 0),
-                                         glm::vec3(20, 20, 20),
-                                         glm::vec3(-90, 0, 0));
+                                         glm::vec3(20, 20, 20));
             obj->addComponent<Mesh>(Mesh::PLANE);
         }
 
