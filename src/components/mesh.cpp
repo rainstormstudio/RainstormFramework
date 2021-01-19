@@ -5,6 +5,7 @@
 #include "../core/systems/graphics.h"
 #include "../debug/debug.h"
 #include "camera.h"
+#include "material.h"
 #include "transform.h"
 
 Mesh::Mesh(Shape shape, size_t shaderIndex) : shaderIndex{shaderIndex} {
@@ -204,11 +205,25 @@ void Mesh::render(double deltaTime) {
     graphics::useShader(shaderIndex);
 
     Transform *transform = owner->getComponent<Transform>();
+    Material *material = owner->getComponent<Material>();
     Object *cameraObject = owner->manager->getObjectByName("mainCamera");
     Camera *camera = cameraObject->getComponent<Camera>();
+
     graphics::applyModel(transform->getModel());
     graphics::applyProjection(camera->getProjection());
     graphics::applyView(camera->getView());
+
+    if (material) {
+        graphics::applyAlbedo(material->albedo());
+        graphics::applyMetallic(material->metallic());
+        graphics::applyRoughness(material->roughness());
+        graphics::applyAO(material->AO());
+    } else {
+        graphics::applyAlbedo(glm::vec3(0.5f, 0.5f, 0.5f));
+        graphics::applyMetallic(0.0f);
+        graphics::applyRoughness(0.0f);
+        graphics::applyAO(0.0f);
+    }
 
     glBindVertexArray(vao);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);

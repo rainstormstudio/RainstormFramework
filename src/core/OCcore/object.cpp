@@ -7,7 +7,6 @@
 Object::Object(OCManager* manager, std::string name, uint8_t layer)
     : manager{manager}, name{name}, layer{layer} {
     isActive_ = true;
-    DEBUG_MSG("object: " + name + " created");
 }
 
 Object::~Object() {
@@ -17,8 +16,6 @@ Object::~Object() {
         components.erase(components.begin() + i);
         i--;
     }
-    DEBUG_MSG("object: " + name + " deleted");
-    DEBUG_LINE();
 }
 
 void Object::initialize() {

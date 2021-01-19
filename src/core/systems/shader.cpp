@@ -36,6 +36,10 @@ void Shader::compileShader(const char* vCode, const char* fCode) {
     uniformModel_ = glGetUniformLocation(shaderID_, "model");
     uniformProjection_ = glGetUniformLocation(shaderID_, "projection");
     uniformView_ = glGetUniformLocation(shaderID_, "view");
+    uniformAlbedo_ = glGetUniformLocation(shaderID_, "albedo");
+    uniformMetallic_ = glGetUniformLocation(shaderID_, "metallic");
+    uniformRoughness_ = glGetUniformLocation(shaderID_, "roughness");
+    uniformAO_ = glGetUniformLocation(shaderID_, "ao");
 }
 
 void Shader::addShader(GLuint program, const char* code, GLenum shaderType) {
@@ -70,6 +74,10 @@ Shader::Shader() {
     uniformProjection_ = 0;
     uniformView_ = 0;
     uniformModel_ = 0;
+    uniformAlbedo_ = 0;
+    uniformMetallic_ = 0;
+    uniformRoughness_ = 0;
+    uniformAO_ = 0;
 }
 
 Shader::~Shader() { destroy(); }
@@ -92,6 +100,14 @@ GLuint Shader::uniformProjection() { return uniformProjection_; }
 GLuint Shader::uniformModel() { return uniformModel_; }
 
 GLuint Shader::uniformView() { return uniformView_; }
+
+GLuint Shader::uniformAlbedo() { return uniformAlbedo_; }
+
+GLuint Shader::uniformMetallic() { return uniformMetallic_; }
+
+GLuint Shader::uniformRoughness() { return uniformRoughness_; }
+
+GLuint Shader::uniformAO() { return uniformAO_; }
 
 void Shader::use() { glUseProgram(shaderID_); }
 

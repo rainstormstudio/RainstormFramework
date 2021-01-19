@@ -68,6 +68,7 @@ Error initialize() {
     }
 
     glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
     glEnable(GL_CULL_FACE);
     if (config::msaa) {
         glEnable(GL_MULTISAMPLE);
@@ -164,6 +165,23 @@ void applyProjection(glm::mat4 projection) {
 void applyView(glm::mat4 view) {
     glUniformMatrix4fv(shaderList[currentShaderIndex]->uniformView(), 1,
                        GL_FALSE, glm::value_ptr(view));
+}
+
+void applyAlbedo(glm::vec3 albedo) {
+    glUniform3fv(shaderList[currentShaderIndex]->uniformAlbedo(), 1,
+                 glm::value_ptr(albedo));
+}
+
+void applyMetallic(float metallic) {
+    glUniform1f(shaderList[currentShaderIndex]->uniformMetallic(), metallic);
+}
+
+void applyRoughness(float roughness) {
+    glUniform1f(shaderList[currentShaderIndex]->uniformRoughness(), roughness);
+}
+
+void applyAO(float ao) {
+    glUniform1f(shaderList[currentShaderIndex]->uniformAO(), ao);
 }
 
 }  // namespace graphics

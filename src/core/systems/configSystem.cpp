@@ -38,6 +38,8 @@ Error initialize() {
                     }
                 }
             }
+            if (tag == "") continue;
+            if (value == "") continue;
 
             tag = utility::toLower(utility::trim(tag));
             value = utility::toLower(utility::trim(value));

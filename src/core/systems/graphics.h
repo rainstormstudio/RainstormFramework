@@ -51,6 +51,11 @@ void applyModel(glm::mat4 model);
 void applyProjection(glm::mat4 projection);
 void applyView(glm::mat4 view);
 
+void applyAlbedo(glm::vec3 albedo);
+void applyMetallic(float metallic);
+void applyRoughness(float roughness);
+void applyAO(float ao);
+
 };  // namespace graphics
 
 #endif
