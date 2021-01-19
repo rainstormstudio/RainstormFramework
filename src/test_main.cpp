@@ -18,6 +18,14 @@ class App : public Engine {
             obj->addComponent<Mesh>(Mesh::CUBE);
         }
 
+        obj = manager->addObject("plane", 1);
+        {
+            obj->addComponent<Transform>(glm::vec3(0, -1.1, 0),
+                                         glm::vec3(20, 20, 20),
+                                         glm::vec3(-90, 0, 0));
+            obj->addComponent<Mesh>(Mesh::PLANE);
+        }
+
         return true;
     }
 

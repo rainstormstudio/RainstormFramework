@@ -24,6 +24,8 @@ class Mesh : public Component {
 
     size_t shaderIndex;
 
+    void calculateNormals(GLfloat *vertices, GLuint *indices, GLuint nVertices,
+                          GLuint nIndices);
     void createMesh(GLfloat *vertices, GLuint *indices, GLuint nVertices,
                     GLuint nIndices);
 

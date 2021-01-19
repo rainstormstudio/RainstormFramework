@@ -4,7 +4,7 @@
 #include "component.h"
 #include "ocManager.h"
 
-Object::Object(OCManager& manager, std::string name, uint8_t layer)
+Object::Object(OCManager* manager, std::string name, uint8_t layer)
     : manager{manager}, name{name}, layer{layer} {
     isActive_ = true;
     DEBUG_MSG("object: " + name + " created");

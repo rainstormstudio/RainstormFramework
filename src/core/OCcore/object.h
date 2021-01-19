@@ -22,13 +22,13 @@ class Object {
     std::map<const std::type_info*, Component*> componentTypes;
 
    public:
-    OCManager& manager;
+    OCManager* manager;
 
     std::vector<Component*> components;
     std::string name;
     uint8_t layer;
 
-    Object(OCManager& manager, std::string name, uint8_t layer);
+    Object(OCManager* manager, std::string name, uint8_t layer);
 
     ~Object();
 

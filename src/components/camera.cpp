@@ -51,10 +51,7 @@ glm::mat4 Camera::getProjection() {
                             perspective.zNear, perspective.zFar);
 }
 
-void Camera::render(double deltaTime) {
-    graphics::applyProjection(getProjection());
-    graphics::applyView(getView());
-}
+void Camera::render(double deltaTime) {}
 
 void Camera::addYaw(GLfloat delta) {
     yaw += delta;

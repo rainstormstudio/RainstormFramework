@@ -90,7 +90,7 @@ void OCManager::renderByLayer(double deltaTime, uint8_t layer) {
 }
 
 Object* OCManager::addObject(std::string name, uint8_t layer) {
-    Object* entity = new Object(*this, name, layer);
+    Object* entity = new Object(this, name, layer);
     objects.emplace_back(entity);
     layers.insert(layer);
     return entity;

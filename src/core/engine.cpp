@@ -87,7 +87,7 @@ void Engine::gameLoop() {
             }
 
             graphics::clearBuffer();
-            graphics::useShader(0);
+            // graphics::useShader(0);
 
             if (!onRender(deltaTime)) {
                 isRunning = false;
@@ -95,7 +95,7 @@ void Engine::gameLoop() {
 
             graphics::update(deltaTime);
 
-            graphics::unbindShader();
+            // graphics::unbindShader();
 
             graphics::renderBuffer();
         }
