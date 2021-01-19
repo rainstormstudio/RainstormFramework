@@ -39,7 +39,7 @@ void renderBuffer();
 
 bool windowShouldClose();
 
-GLFWwindow* getWindow();
+GLFWwindow *getWindow();
 
 uint32_t screenWidth();
 uint32_t screenHeight();
@@ -47,14 +47,13 @@ uint32_t screenHeight();
 void useShader(size_t index = 0);
 void unbindShader();
 
-void applyModel(glm::mat4 model);
-void applyProjection(glm::mat4 projection);
-void applyView(glm::mat4 view);
+size_t registerLight(glm::vec3 pos, glm::vec3 color);
+void updateLight(size_t id, glm::vec3 pos, glm::vec3 color);
+void applyLightUniforms();
 
-void applyAlbedo(glm::vec3 albedo);
-void applyMetallic(float metallic);
-void applyRoughness(float roughness);
-void applyAO(float ao);
+void applyUniform(const std::string &name, glm::mat4 value);
+void applyUniform(const std::string &name, glm::vec3 value);
+void applyUniform(const std::string &name, float value);
 
 };  // namespace graphics
 

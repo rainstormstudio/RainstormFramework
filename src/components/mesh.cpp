@@ -5,6 +5,7 @@
 #include "../core/systems/graphics.h"
 #include "../debug/debug.h"
 #include "camera.h"
+#include "light.h"
 #include "material.h"
 #include "transform.h"
 
@@ -205,24 +206,30 @@ void Mesh::render(double deltaTime) {
     graphics::useShader(shaderIndex);
 
     Transform *transform = owner->getComponent<Transform>();
-    Material *material = owner->getComponent<Material>();
+
+    Material *material = nullptr;
+    if (owner->hasComponent<Material>()) {
+        material = owner->getComponent<Material>();
+    }
+
+    Light *light = nullptr;
+    if (owner->hasComponent<Light>()) {
+        light = owner->getComponent<Light>();
+    }
+
     Object *cameraObject = owner->manager->getObjectByName("mainCamera");
     Camera *camera = cameraObject->getComponent<Camera>();
 
-    graphics::applyModel(transform->getModel());
-    graphics::applyProjection(camera->getProjection());
-    graphics::applyView(camera->getView());
+    graphics::applyUniform("model", transform->getModel());
+    graphics::applyUniform("projection", camera->getProjection());
+    graphics::applyUniform("view", camera->getView());
 
     if (material) {
-        graphics::applyAlbedo(material->albedo());
-        graphics::applyMetallic(material->metallic());
-        graphics::applyRoughness(material->roughness());
-        graphics::applyAO(material->AO());
-    } else {
-        graphics::applyAlbedo(glm::vec3(0.5f, 0.5f, 0.5f));
-        graphics::applyMetallic(0.0f);
-        graphics::applyRoughness(0.0f);
-        graphics::applyAO(0.0f);
+        material->applyUniforms();
+        graphics::applyUniform("viewPosition", camera->getViewPosition());
+        graphics::applyLightUniforms();
+    } else if (light) {
+        graphics::applyUniform("lightColor", light->color);
     }
 
     glBindVertexArray(vao);

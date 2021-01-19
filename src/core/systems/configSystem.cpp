@@ -7,6 +7,8 @@ namespace config {
 std::string configFilePath = "./config/settings.cfg";
 std::string vShaderPath = "./shaders/vertex.glsl";
 std::string fShaderPath = "./shaders/fragment.glsl";
+std::string vLightShaderPath = "./shaders/light_vertex.glsl";
+std::string fLightShaderPath = "./shaders/light_fragment.glsl";
 
 uint32_t screenWidth = 800;
 uint32_t screenHeight = 600;
@@ -58,6 +60,10 @@ Error initialize() {
                 vShaderPath = value;
             } else if (tag == "fshader") {
                 fShaderPath = value;
+            } else if (tag == "vlightshader") {
+                vLightShaderPath = value;
+            } else if (tag == "flightshader") {
+                fLightShaderPath = value;
             } else if (tag == "msaa" && utility::isNat(value)) {
                 msaa = std::stoi(value);
             }

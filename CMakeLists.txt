@@ -6,6 +6,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 
+cmake_policy(SET CMP0072 NEW)
+
 if(UNIX)
     find_package(OpenGL REQUIRED)
     find_package(glfw3 REQUIRED)

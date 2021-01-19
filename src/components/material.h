@@ -31,10 +31,7 @@ class Material : public Component {
 
     ~Material() override {}
 
-    glm::vec3 albedo() { return albedo_; };
-    float metallic() { return metallic_; };
-    float roughness() { return roughness_; };
-    float AO() { return ao_; };
+    void applyUniforms();
 
     void initialize() override {}
     void update(double deltaTime) override {}

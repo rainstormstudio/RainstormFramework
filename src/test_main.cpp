@@ -12,20 +12,33 @@ class App : public Engine {
             camera->addComponent<Control>(5.0);
         }
 
-        for (int i = 0; i < 3000; i++) {
-            Object* obj = manager->addObject("cube" + std::to_string(i), 1);
+        Object* obj = nullptr;
+
+        for (int i = 0; i < 10; i++) {
+            obj = manager->addObject("light" + std::to_string(i), 0);
             {
-                obj->addComponent<Transform>(glm::ballRand(50.0f));
-                obj->addComponent<Mesh>(Mesh::CUBE);
-                obj->addComponent<Material>(glm::ballRand(1.0f));
+                obj->addComponent<Transform>(glm::ballRand(10.0),
+                                             glm::vec3(0.1, 0.1, 0.1));
+                obj->addComponent<Mesh>(Mesh::CUBE, 1);
+                obj->addComponent<Light>(glm::ballRand(1.0f));
             }
         }
 
-        Object* obj = manager->addObject("plane", 1);
+        for (int i = 0; i < 3000; i++) {
+            obj = manager->addObject("cube" + std::to_string(i), 1);
+            {
+                obj->addComponent<Transform>(glm::ballRand(50.0f));
+                obj->addComponent<Mesh>(Mesh::CUBE);
+                obj->addComponent<Material>(glm::vec3(1.0f));
+            }
+        }
+
+        obj = manager->addObject("plane", 1);
         {
             obj->addComponent<Transform>(glm::vec3(0, -1.1, 0),
                                          glm::vec3(20, 20, 20));
             obj->addComponent<Mesh>(Mesh::PLANE);
+            obj->addComponent<Material>(glm::vec3(0, 0.5, 0));
         }
 
         return true;

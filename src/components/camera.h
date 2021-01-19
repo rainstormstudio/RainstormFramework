@@ -52,6 +52,7 @@ class Camera : public Component {
 
     glm::mat4 getView();
     glm::mat4 getProjection();
+    glm::vec3 getViewPosition();
 };
 
 #endif

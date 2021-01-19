@@ -70,3 +70,8 @@ void Camera::addPitch(GLfloat delta) {
         pitch = -89.0f;
     }
 }
+
+glm::vec3 Camera::getViewPosition() {
+    Transform* transform = owner->getComponent<Transform>();
+    return transform->transform;
+}

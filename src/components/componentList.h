@@ -14,6 +14,7 @@
 // built-in
 #include "camera.h"
 #include "control.h"
+#include "light.h"
 #include "material.h"
 #include "mesh.h"
 #include "transform.h"

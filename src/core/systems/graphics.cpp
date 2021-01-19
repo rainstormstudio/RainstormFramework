@@ -25,6 +25,11 @@ uint32_t screenHeight_ = 600;
 std::string windowTitle = "REngine";
 bool showFPS = true;
 
+const size_t MAX_LIGHTS = 10;
+glm::vec3 lightPositions[MAX_LIGHTS];
+glm::vec3 lightColors[MAX_LIGHTS];
+size_t nLights = 0;
+
 std::vector<Shader *> shaderList;
 size_t currentShaderIndex;
 
@@ -88,6 +93,10 @@ Error initialize() {
     shader->createFromFiles(config::vShaderPath.c_str(),
                             config::fShaderPath.c_str());
     shaderList.emplace_back(shader);
+    Shader *lightShader = new Shader();
+    lightShader->createFromFiles(config::vLightShaderPath.c_str(),
+                                 config::fLightShaderPath.c_str());
+    shaderList.emplace_back(lightShader);
     currentShaderIndex = 0;
 
     DEBUG_MSG("Graphics initialized");
@@ -152,36 +161,44 @@ uint32_t screenWidth() { return screenWidth_; }
 
 uint32_t screenHeight() { return screenHeight_; }
 
-void applyModel(glm::mat4 model) {
-    glUniformMatrix4fv(shaderList[currentShaderIndex]->uniformModel(), 1,
-                       GL_FALSE, glm::value_ptr(model));
+void applyUniform(const std::string &name, glm::mat4 value) {
+    glUniformMatrix4fv(shaderList[currentShaderIndex]->getUniform(name), 1,
+                       GL_FALSE, glm::value_ptr(value));
 }
 
-void applyProjection(glm::mat4 projection) {
-    glUniformMatrix4fv(shaderList[currentShaderIndex]->uniformProjection(), 1,
-                       GL_FALSE, glm::value_ptr(projection));
+void applyUniform(const std::string &name, glm::vec3 value) {
+    glUniform3fv(shaderList[currentShaderIndex]->getUniform(name), 1,
+                 glm::value_ptr(value));
 }
 
-void applyView(glm::mat4 view) {
-    glUniformMatrix4fv(shaderList[currentShaderIndex]->uniformView(), 1,
-                       GL_FALSE, glm::value_ptr(view));
+void applyUniform(const std::string &name, float value) {
+    glUniform1f(shaderList[currentShaderIndex]->getUniform(name), value);
 }
 
-void applyAlbedo(glm::vec3 albedo) {
-    glUniform3fv(shaderList[currentShaderIndex]->uniformAlbedo(), 1,
-                 glm::value_ptr(albedo));
+size_t registerLight(glm::vec3 pos, glm::vec3 color) {
+    if (nLights < MAX_LIGHTS) {
+        size_t id = nLights;
+        lightPositions[id] = pos;
+        lightColors[id] = color;
+        nLights++;
+        return id;
+    }
+    return 0;
 }
 
-void applyMetallic(float metallic) {
-    glUniform1f(shaderList[currentShaderIndex]->uniformMetallic(), metallic);
+void updateLight(size_t id, glm::vec3 pos, glm::vec3 color) {
+    if (id < nLights) {
+        lightPositions[id] = pos;
+        lightColors[id] = color;
+    }
 }
 
-void applyRoughness(float roughness) {
-    glUniform1f(shaderList[currentShaderIndex]->uniformRoughness(), roughness);
-}
-
-void applyAO(float ao) {
-    glUniform1f(shaderList[currentShaderIndex]->uniformAO(), ao);
+void applyLightUniforms() {
+    glUniform3fv(shaderList[currentShaderIndex]->getUniform("lightPositions"),
+                 nLights, glm::value_ptr(lightPositions[0]));
+    glUniform3fv(shaderList[currentShaderIndex]->getUniform("lightColors"),
+                 nLights, glm::value_ptr(lightColors[0]));
+    glUniform1i(shaderList[currentShaderIndex]->getUniform("nLights"), nLights);
 }
 
 }  // namespace graphics

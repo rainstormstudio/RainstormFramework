@@ -14,17 +14,10 @@
 
 #include <GL/glew.h>
 
+#include "../../utilities/includes.h"
+
 class Shader {
     GLuint shaderID_;
-
-    GLuint uniformProjection_;
-    GLuint uniformModel_;
-    GLuint uniformView_;
-
-    GLuint uniformAlbedo_;
-    GLuint uniformMetallic_;
-    GLuint uniformRoughness_;
-    GLuint uniformAO_;
 
     void compileShader(const char* vCode, const char* fCode);
     void addShader(GLuint program, const char* code, GLenum shaderType);
@@ -36,17 +29,11 @@ class Shader {
     void createFromString(const char* vCode, const char* fCode);
     void createFromFiles(const char* vCodePath, const char* fCodePath);
 
-    GLuint uniformProjection();
-    GLuint uniformModel();
-    GLuint uniformView();
-
-    GLuint uniformAlbedo();
-    GLuint uniformMetallic();
-    GLuint uniformRoughness();
-    GLuint uniformAO();
-
     void use();
     void destroy();
+
+   public:
+    GLuint getUniform(const std::string& name);
 };
 
 #endif
