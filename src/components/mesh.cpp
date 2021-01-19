@@ -70,8 +70,6 @@ void Mesh::createMesh(GLfloat *vertices, GLuint *indices, GLuint nVertices,
 }
 
 void Mesh::render(double deltaTime) {
-    DEBUG_MSG_INDENT("mesh component render", 1);
-
     Transform *transform = owner->getComponent<Transform>();
     graphics::applyModel(transform->getModel());
 

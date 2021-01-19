@@ -8,12 +8,12 @@
 #include "shader.h"
 
 // callbacks
-void glfwErrorCallback(int error, const char *description) {
+static void glfwErrorCallback(int error, const char *description) {
     DEBUG_ERROR(description);
 }
 
-void glfwFramebufferSizeCallback(GLFWwindow *window, int screenWidth,
-                                 int screenHeight) {
+static void glfwFramebufferSizeCallback(GLFWwindow *window, int screenWidth,
+                                        int screenHeight) {
     glViewport(0, 0, screenWidth, screenHeight);
 }
 
@@ -88,6 +88,31 @@ Error initialize() {
     return Error::OK;
 }
 
+void setCursorMode(CursorMode mode) {
+    switch (mode) {
+        case NORMAL: {
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+            break;
+        }
+        case HIDDEN: {
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+            break;
+        }
+        case DISABLED: {
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+            break;
+        }
+    }
+}
+
+void update(double deltaTime) {
+    if (showFPS) {
+        std::string title =
+            windowTitle + " - FPS: " + std::to_string(1.0 / deltaTime);
+        glfwSetWindowTitle(window, title.c_str());
+    }
+}
+
 void destroy() {
     for (size_t i = 0; i < shaderList.size(); i++) {
         delete shaderList[i];
@@ -98,6 +123,8 @@ void destroy() {
     glfwDestroyWindow(window);
     glfwTerminate();
 }
+
+GLFWwindow *getWindow() { return window; }
 
 void clearBuffer() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
 

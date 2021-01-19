@@ -3,10 +3,13 @@
 class App : public Engine {
    public:
     bool onCreate() override {
+        graphics::setCursorMode(graphics::DISABLED);
+
         Object* camera = manager->addObject("mainCamera", 0);
         {
             camera->addComponent<Transform>();
             camera->addComponent<Camera>();
+            camera->addComponent<Control>(5.0);
         }
 
         Object* obj = manager->addObject("cube", 1);

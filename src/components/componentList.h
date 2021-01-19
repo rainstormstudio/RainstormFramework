@@ -13,6 +13,7 @@
 
 // built-in
 #include "camera.h"
+#include "control.h"
 #include "mesh.h"
 #include "transform.h"
 

@@ -32,6 +32,8 @@
 #include "./components/componentList.h"
 
 // systems
+#include "./core/systems/graphics.h"
+#include "./core/systems/inputManager.h"
 #include "./core/systems/jobManager.h"
 
 #endif

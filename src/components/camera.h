@@ -19,18 +19,17 @@
 #include "../core/OCcore/component.h"
 
 class Camera : public Component {
+    GLfloat yaw;
+    GLfloat pitch;
+
+   public:
     glm::vec3 front;
     glm::vec3 up;
     glm::vec3 right;
     glm::vec3 worldUp;
 
-    GLfloat yaw;
-    GLfloat pitch;
-
-    GLfloat moveSpeed;
     GLfloat turnSpeed;
 
-   public:
     struct Perspective {
         float fov;
         float aspect;
@@ -40,13 +39,17 @@ class Camera : public Component {
     Perspective perspective;
 
     Camera();
-    Camera(glm::vec3 worldUp, GLfloat yaw, GLfloat pitch, GLfloat moveSpeed,
-           GLfloat turnSpeed, Perspective perspective);
+    Camera(glm::vec3 worldUp, GLfloat yaw, GLfloat pitch, GLfloat turnSpeed,
+           Perspective perspective);
     ~Camera() override {}
 
     void initialize() override {}
-    void update(double deltaTime) override;
+    void update(double deltaTime) override {}
+    void update();
     void render(double deltaTime) override;
+
+    void addYaw(GLfloat delta);
+    void addPitch(GLfloat delta);
 
     glm::mat4 getView();
     glm::mat4 getProjection();

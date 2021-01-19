@@ -17,16 +17,14 @@ Camera::Camera() {
         45.0f, (float)graphics::screenWidth() / (float)graphics::screenHeight(),
         0.1f, 100.0f};
 
-    moveSpeed = 5.0f;
     turnSpeed = 0.05f;
 }
 
-Camera::Camera(glm::vec3 worldUp, GLfloat yaw, GLfloat pitch, GLfloat moveSpeed,
-               GLfloat turnSpeed, Perspective perspective)
+Camera::Camera(glm::vec3 worldUp, GLfloat yaw, GLfloat pitch, GLfloat turnSpeed,
+               Perspective perspective)
     : worldUp{worldUp},
       yaw{yaw},
       pitch{pitch},
-      moveSpeed{moveSpeed},
       turnSpeed{turnSpeed},
       perspective{perspective} {
     front = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -34,8 +32,7 @@ Camera::Camera(glm::vec3 worldUp, GLfloat yaw, GLfloat pitch, GLfloat moveSpeed,
     update(0.0f);
 }
 
-void Camera::update(double deltaTime) {
-    DEBUG_MSG_INDENT("camera component update", 1);
+void Camera::update() {
     front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
     front.y = sin(glm::radians(pitch));
     front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
@@ -55,7 +52,26 @@ glm::mat4 Camera::getProjection() {
 }
 
 void Camera::render(double deltaTime) {
-    DEBUG_MSG_INDENT("camera component render", 1);
     graphics::applyProjection(getProjection());
     graphics::applyView(getView());
+}
+
+void Camera::addYaw(GLfloat delta) {
+    yaw += delta;
+    if (yaw > 360.0f) {
+        yaw -= 360.0f;
+    }
+    if (yaw < 0.0f) {
+        yaw += 360.0f;
+    }
+}
+
+void Camera::addPitch(GLfloat delta) {
+    pitch += delta;
+    if (pitch > 89.0f) {
+        pitch = 89.0f;
+    }
+    if (pitch < -89.0f) {
+        pitch = -89.0f;
+    }
 }

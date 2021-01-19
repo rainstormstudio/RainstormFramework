@@ -25,13 +25,20 @@ namespace graphics {
 
 Error initialize();
 
+enum CursorMode { NORMAL, HIDDEN, DISABLED };
+void setCursorMode(CursorMode mode);
+
 void destroy();
 
 void clearBuffer();
 
+void update(double deltaTime);
+
 void renderBuffer();
 
 bool windowShouldClose();
+
+GLFWwindow* getWindow();
 
 uint32_t screenWidth();
 uint32_t screenHeight();

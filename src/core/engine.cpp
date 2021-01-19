@@ -4,6 +4,7 @@
 #include "./OCcore/ocManager.h"
 #include "./systems/configSystem.h"
 #include "./systems/graphics.h"
+#include "./systems/inputManager.h"
 #include "./systems/jobManager.h"
 
 Engine::Engine() {}
@@ -23,6 +24,8 @@ bool Engine::initialize() {
         return false;
     }
 
+    inputManager::initialize();
+
     manager = new OCManager();
 
     isRunning = false;
@@ -35,6 +38,7 @@ bool Engine::initialize() {
 
 void Engine::destroy() {
     delete manager;
+    inputManager::destroy();
     graphics::destroy();
     jobManager::sync();
     jobManager::destroy();
@@ -72,7 +76,8 @@ void Engine::gameLoop() {
             }
             time_a = time_b;
 
-            glfwPollEvents();
+            inputManager::update();
+
             if (graphics::windowShouldClose()) {
                 isRunning = false;
             }
@@ -88,10 +93,11 @@ void Engine::gameLoop() {
                 isRunning = false;
             }
 
+            graphics::update(deltaTime);
+
             graphics::unbindShader();
 
             graphics::renderBuffer();
-            DEBUG_DLINE();
         }
 
         if (!onDestroy()) {
