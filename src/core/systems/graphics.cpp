@@ -3,6 +3,7 @@
 #include "../../debug/debug.h"
 #include "configSystem.h"
 #include "shader.h"
+#include "texture.h"
 
 // callbacks
 static void glfwErrorCallback(int error, const char *description) {
@@ -32,6 +33,8 @@ size_t nLights = 0;
 
 std::vector<Shader *> shaderList;
 size_t currentShaderIndex;
+
+std::map<std::string, Texture *> textures;
 
 Error initialize() {
     DEBUG_MSG("Initializing Graphics");
@@ -200,5 +203,13 @@ void applyLightUniforms() {
                  nLights, glm::value_ptr(lightColors[0]));
     glUniform1i(shaderList[currentShaderIndex]->getUniform("nLights"), nLights);
 }
+
+void registerTexture(std::string name, std::string filePath) {
+    if (textures.find(name) == textures.end()) {
+        textures[name] = new Texture(filePath.c_str());
+        textures[name]->loadTextureAlpha();
+    }
+}
+void useTexture(std::string name) { textures[name]->use(); }
 
 }  // namespace graphics

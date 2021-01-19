@@ -47,6 +47,9 @@ uint32_t screenHeight();
 void useShader(size_t index = 0);
 void unbindShader();
 
+void registerTexture(std::string name, std::string filePath);
+void useTexture(std::string name);
+
 size_t registerLight(glm::vec3 pos, glm::vec3 color);
 void updateLight(size_t id, glm::vec3 pos, glm::vec3 color);
 void applyLightUniforms();

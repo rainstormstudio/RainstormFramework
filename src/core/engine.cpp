@@ -14,7 +14,7 @@ Engine::~Engine() {}
 bool Engine::onDestroy() { return true; }
 
 bool Engine::initialize() {
-    // std::srand(std::time(0));
+    std::srand(std::time(0));
 
     if (config::initialize() != Error::OK) {
         return false;
