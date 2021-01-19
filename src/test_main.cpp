@@ -29,7 +29,9 @@ class App : public Engine {
             {
                 obj->addComponent<Transform>(glm::ballRand(50.0f));
                 obj->addComponent<Mesh>(Mesh::CUBE);
-                obj->addComponent<Material>(glm::vec3(1.0f));
+                obj->addComponent<Material>(glm::vec3(1.0f),
+                                            glm::linearRand(0.0f, 1.0f),
+                                            glm::linearRand(0.0f, 1.0f));
             }
         }
 
