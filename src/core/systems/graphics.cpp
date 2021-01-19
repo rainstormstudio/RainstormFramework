@@ -1,8 +1,5 @@
 #include "graphics.h"
 
-#include <glm/gtc/type_ptr.hpp>
-#include <glm/gtx/string_cast.hpp>
-
 #include "../../debug/debug.h"
 #include "configSystem.h"
 #include "shader.h"
@@ -15,6 +12,8 @@ static void glfwErrorCallback(int error, const char *description) {
 static void glfwFramebufferSizeCallback(GLFWwindow *window, int screenWidth,
                                         int screenHeight) {
     glViewport(0, 0, screenWidth, screenHeight);
+    graphics::screenWidth_ = screenWidth;
+    graphics::screenHeight_ = screenHeight;
 }
 
 namespace graphics {

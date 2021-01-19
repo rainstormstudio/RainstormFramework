@@ -1,11 +1,9 @@
 #include "camera.h"
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-
 #include "../core/OCcore/object.h"
 #include "../core/systems/graphics.h"
 #include "../debug/debug.h"
+#include "../math/math.h"
 #include "transform.h"
 
 Camera::Camera() {

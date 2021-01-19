@@ -12,11 +12,8 @@
 #ifndef RS_C_TRANSFORM_H
 #define RS_C_TRANSFORM_H
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/mat4x4.hpp>
-
 #include "../core/OCcore/component.h"
+#include "../math/math.h"
 
 class Transform : public Component {
     const float toRadians = 3.1415926f / 180.0f;

@@ -17,6 +17,5 @@ void main() {
 
   vTexCoord = 1.0 - texCoord;
   vNormal = normalize(mat3(transpose(inverse(model))) * normal);
-  vColor = vec4(clamp(vNormal, 0.0f, 1.0f), 1.0f);
-  // vColor = vec4(position, 1.0);
+  vColor = vec4(clamp(vNormal * 0.5 + 0.5, 0.0f, 1.0f), 1.0f);
 }

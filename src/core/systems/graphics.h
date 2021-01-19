@@ -15,13 +15,14 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include <glm/glm.hpp>
-
 #include "../../error/error.h"
 #include "../../math/math.h"
 #include "../../utilities/includes.h"
 
 namespace graphics {
+
+extern uint32_t screenWidth_;
+extern uint32_t screenHeight_;
 
 Error initialize();
 

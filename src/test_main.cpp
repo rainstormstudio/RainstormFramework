@@ -12,13 +12,15 @@ class App : public Engine {
             camera->addComponent<Control>(5.0);
         }
 
-        Object* obj = manager->addObject("cube", 1);
-        {
-            obj->addComponent<Transform>(glm::vec3(-1, 0, -5));
-            obj->addComponent<Mesh>(Mesh::CUBE);
+        for (int i = 0; i < 200; i++) {
+            Object* obj = manager->addObject("cube" + std::to_string(i), 1);
+            {
+                obj->addComponent<Transform>(glm::ballRand(50.0f));
+                obj->addComponent<Mesh>(Mesh::CUBE);
+            }
         }
 
-        obj = manager->addObject("plane", 1);
+        Object* obj = manager->addObject("plane", 1);
         {
             obj->addComponent<Transform>(glm::vec3(0, -1.1, 0),
                                          glm::vec3(20, 20, 20),

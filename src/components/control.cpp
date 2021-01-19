@@ -1,10 +1,8 @@
 #include "control.h"
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-
 #include "../core/OCcore/object.h"
 #include "../core/systems/inputManager.h"
+#include "../math/math.h"
 #include "camera.h"
 #include "transform.h"
 

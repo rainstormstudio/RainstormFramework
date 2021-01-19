@@ -14,9 +14,8 @@
 
 #include <GL/glew.h>
 
-#include <glm/glm.hpp>
-
 #include "../core/OCcore/component.h"
+#include "../math/math.h"
 
 class Camera : public Component {
     GLfloat yaw;
