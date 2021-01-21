@@ -32,23 +32,25 @@ class App : public Engine {
                 obj->addComponent<Transform>(glm::ballRand(10.0),
                                              glm::vec3(0.1, 0.1, 0.1));
                 obj->addComponent<Mesh>(Mesh::CUBE, 1);
-                obj->addComponent<Light>(glm::vec3(1.0f));
+                obj->addComponent<Light>(glm::vec3(glm::linearRand(0.5, 1.0),
+                                                   glm::linearRand(0.5, 1.0),
+                                                   glm::linearRand(0.5, 1.0)));
             }
         }
         DEBUG_MSG("lights created");
-        /*
-                for (int i = 0; i < 3000; i++) {
-                    obj = manager->addObject("cube" + std::to_string(i), 1);
-                    {
-                        obj->addComponent<Transform>(glm::ballRand(50.0f));
-                        obj->addComponent<Mesh>(Mesh::CUBE);
-                        obj->addComponent<Material>(glm::ballRand(1.0f),
-                                                    glm::linearRand(0.0f, 1.0f),
-                                                    glm::linearRand(0.0f, 1.0f));
-                    }
-                }
-                DEBUG_MSG("cubes created");
-        */
+
+        for (int i = 0; i < 3000; i++) {
+            obj = manager->addObject("cube" + std::to_string(i), 1);
+            {
+                obj->addComponent<Transform>(glm::ballRand(50.0f));
+                obj->addComponent<Mesh>(Mesh::CUBE);
+                obj->addComponent<Material>(glm::ballRand(1.0f),
+                                            glm::linearRand(0.0f, 1.0f),
+                                            glm::linearRand(0.0f, 1.0f));
+            }
+        }
+        DEBUG_MSG("cubes created");
+
         obj = manager->addObject("plane", 1);
         {
             obj->addComponent<Transform>(glm::vec3(0, -1.1, 0),

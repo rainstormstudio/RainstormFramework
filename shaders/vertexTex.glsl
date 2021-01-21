@@ -5,7 +5,6 @@ layout(location = 1) in vec2 texCoord;
 layout(location = 2) in vec3 normal;
 
 out vec3 vPosition;
-out vec4 vColor;
 out vec2 vTexCoord;
 out vec3 vNormal;
 
@@ -18,6 +17,5 @@ void main() {
 
   vPosition = vec3(model * vec4(position, 1.0f));
   vNormal = normalize(mat3(transpose(inverse(model))) * normal);
-  vColor = vec4(1.0f);
   vTexCoord = texCoord;
 }

@@ -43,15 +43,27 @@ vec3 fresnelSchlick(float cosTheta, vec3 F0) {
   return F0 + (1.0 - F0) * pow(1.0 - cosTheta, 5.0);
 }
 
+vec3 calcNormal() {
+  vec3 tangentNormal = texture(normalMap, vTexCoord).rgb * 2.0 - 1.0;
+  vec3 Q1 = dFdx(vPosition);
+  vec3 Q2 = dFdy(vPosition);
+  vec2 st1 = dFdx(vTexCoord);
+  vec2 st2 = dFdy(vTexCoord);
+  vec3 N = normalize(vNormal);
+  vec3 T = normalize(Q1 * st2.t - Q2 * st1.t);
+  vec3 B = -normalize(cross(N, T));
+  mat3 TBN = mat3(T, B, N);
+  return TBN * tangentNormal;
+}
+
 void main() {
   vec3 albedo = pow(texture(albedoMap, vTexCoord).rgb, vec3(2.2f));
-  // vec3 vNormal = texture(normalMap, vTexCoord).rgb;
-  // vNormal = normalize(vNormal * 2.0 - 1.0);
+  vec3 normal = calcNormal();
   float metallic = texture(metallicMap, vTexCoord).r;
   float roughness = texture(roughnessMap, vTexCoord).r;
   float ao = texture(aoMap, vTexCoord).r;
 
-  vec3 N = normalize(vNormal);
+  vec3 N = normalize(normal);
   vec3 V = normalize(viewPosition - vPosition);
 
   vec3 F0 = vec3(0.04f);
