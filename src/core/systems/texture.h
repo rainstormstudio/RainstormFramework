@@ -22,13 +22,12 @@ class Texture {
     const char* filePath_;
 
    public:
-    Texture();
     Texture(const char* filePath);
     ~Texture();
 
     bool loadTexture();
     bool loadTextureAlpha();
-    void use();
+    void use(size_t index);
     void destroy();
 };
 

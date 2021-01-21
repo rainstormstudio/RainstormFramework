@@ -14,20 +14,15 @@ STATIC_ASSERT(expr) assert expr at compile-time
 
 ASSERT(expr) assert expr at run-time
 
-DEBUG_MSG(expr) put expr to standard error
+DEBUG_ADD_DEPTH() add one level more indentation for displaying
 
-DEBUG_MSG_INDENT(expr, depth) put expr with indentation based on depth
-    to standard error
+DEBUG_DEC_DEPTH() decrease on level of indentation
+
+DEBUG_MSG(expr) put expr to standard error
 
 DEBUG_LINE() put a horizontal line to standard error
 
-DEBUG_LINE_INDENT(depth) put a horizontal line with indentation
-    based on depth to standard error
-
 DEBUG_ERROR(expr) put expr to standard error
-
-DEBUG_ERROR_INDENT(expr, depth) put expr with indentation based on depth
-    to standard error
 */
 
 #ifndef RS_DEBUG_H
@@ -58,40 +53,40 @@ DEBUG_ERROR_INDENT(expr, depth) put expr with indentation based on depth
         debugbreak();                          \
     }
 
+#define DEBUG_ADD_DEPTH() debug::addDepth()
+#define DEBUG_DEC_DEPTH() debug::decDepth()
 #define DEBUG_MSG(expr) debug::msg(expr)
-#define DEBUG_MSG_INDENT(expr, depth) debug::msg(expr, depth)
 #define DEBUG_LINE() debug::line()
-#define DEBUG_LINE_INDENT(depth) debug::line(depth)
-#define DEBUG_DLINE() debug::line(0, '=')
-#define DEBUG_DLINE_INDENT(depth) debug::line(depth, '=')
+#define DEBUG_DLINE() debug::line('=')
 #define DEBUG_ERROR(expr) debug::error(expr)
-#define DEBUG_ERROR_INDENT(expr, depth) debug::error(expr, depth)
 
 #else
 #define STATIC_ASSERT(expr)
 #define ASSERT(expr)
+#define DEBUG_ADD_DEPTH()
+#define DEBUG_DEC_DEPTH()
 #define DEBUG_MSG(expr)
-#define DEBUG_MSG_INDENT(expr, depth)
 #define DEBUG_DLINE()
-#define DEBUG_DLINE_INDENT(depth)
 #define DEBUG_LINE()
-#define DEBUG_LINE_INDENT(depth)
 #define DEBUG_ERROR(expr)
-#define DEBUG_ERROR_INDENT(expr, depth)
 #endif
 
 namespace debug {
 void msg(const char* expr, const char* file, int line);
 
-void msg(std::string expr, int depth = 0);
+void msg(std::string expr);
 
-void msg(const char* expr, int depth = 0);
+void msg(const char* expr);
 
-void error(std::string expr, int depth = 0);
+void error(std::string expr);
 
-void error(const char* expr, int depth = 0);
+void error(const char* expr);
 
-void line(int depth = 0, char ch = '-');
+void line(char ch = '-');
+
+void addDepth();
+
+void decDepth();
 }  // namespace debug
 
 #endif

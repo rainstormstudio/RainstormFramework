@@ -13,6 +13,8 @@
 #define RS_C_MATERIAL_H
 
 #include "../core/OCcore/component.h"
+#include "../core/systems/texture.h"
+#include "../debug/debug.h"
 #include "../math/math.h"
 
 class Material : public Component {
@@ -21,13 +23,29 @@ class Material : public Component {
     float roughness_;
     float ao_;
 
+    std::string albedoMap_;
+    std::string normalMap_;
+    std::string metallicMap_;
+    std::string roughnessMap_;
+    std::string aoMap_;
+
+    bool useTextures;
+
    public:
     Material(glm::vec3 albedo, float metallic = 0.0f, float roughness = 0.0f,
              float ao = 0.0f)
-        : albedo_{albedo},
-          metallic_{metallic},
-          roughness_{roughness},
-          ao_{ao} {}
+        : albedo_{albedo}, metallic_{metallic}, roughness_{roughness}, ao_{ao} {
+        albedoMap_ = "";
+        normalMap_ = "";
+        metallicMap_ = "";
+        roughnessMap_ = "";
+        aoMap_ = "";
+        useTextures = false;
+    }
+
+    Material(std::string albedoMap, std::string normalMap,
+             std::string metallicMap, std::string roughnessMap,
+             std::string aoMap);
 
     ~Material() override {}
 

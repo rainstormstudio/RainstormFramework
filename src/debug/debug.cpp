@@ -4,40 +4,44 @@
 
 namespace debug {
 
+static unsigned int depth = 0;
+
 void msg(const char* expr, const char* file, int line) {
     std::cerr << "[" << file << "] at line " << line << ": " << expr
               << std::endl;
 }
 
-void msg(std::string expr, int depth) {
+void msg(std::string expr) {
     for (int i = 0; i < depth; i++) {
         std::cerr << "    ";
     }
     std::cerr << "MSG: " << expr << std::endl;
 }
 
-void msg(const char* expr, int depth) {
+void msg(const char* expr) {
     for (int i = 0; i < depth; i++) {
         std::cerr << "    ";
     }
     std::cerr << "MSG: " << expr << std::endl;
 }
 
-void error(std::string expr, int depth) {
+void error(std::string expr) {
     for (int i = 0; i < depth; i++) {
         std::cerr << "    ";
     }
-    std::cerr << "ERROR: " << expr << std::endl;
+    std::cerr << "\033[0;31m"
+              << "ERROR: " << expr << "\033[0m" << std::endl;
 }
 
-void error(const char* expr, int depth) {
+void error(const char* expr) {
     for (int i = 0; i < depth; i++) {
         std::cerr << "    ";
     }
-    std::cerr << "ERROR: " << expr << std::endl;
+    std::cerr << "\033[0;31m"
+              << "ERROR: " << expr << "\033[0m" << std::endl;
 }
 
-void line(int depth, char ch) {
+void line(char ch) {
     for (int i = 0; i < depth; i++) {
         std::cerr << "    ";
     }
@@ -46,4 +50,13 @@ void line(int depth, char ch) {
     }
     std::cerr << std::endl;
 }
+
+void addDepth() { depth++; }
+
+void decDepth() {
+    if (depth) {
+        depth--;
+    }
+}
+
 }  // namespace debug

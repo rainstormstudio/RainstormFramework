@@ -45,7 +45,7 @@ class Object {
         component->owner = this;
         components.emplace_back(component);
         componentTypes[&typeid(*component)] = component;
-        component->initialize();
+        // component->initialize();
         return *component;
     }
 

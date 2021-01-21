@@ -54,7 +54,7 @@ void Shader::addShader(GLuint program, const char* code, GLenum shaderType) {
     if (!result) {
         glGetShaderInfoLog(shader, sizeof(eLog), NULL, eLog);
         DEBUG_ERROR("Failed to compile shader: " + std::to_string(shaderType));
-        DEBUG_ERROR_INDENT(eLog, 1);
+        DEBUG_ERROR(eLog);
         return;
     }
 

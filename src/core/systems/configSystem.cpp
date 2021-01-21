@@ -7,6 +7,8 @@ namespace config {
 std::string configFilePath = "./config/settings.cfg";
 std::string vShaderPath = "./shaders/vertex.glsl";
 std::string fShaderPath = "./shaders/fragment.glsl";
+std::string vTexShaderPath = "./shaders/vertexTex.glsl";
+std::string fTexShaderPath = "./shaders/fragmentTex.glsl";
 std::string vLightShaderPath = "./shaders/light_vertex.glsl";
 std::string fLightShaderPath = "./shaders/light_fragment.glsl";
 
@@ -17,6 +19,7 @@ uint8_t msaa = 0;
 
 Error initialize() {
     DEBUG_MSG("Initializing Configuration");
+    DEBUG_ADD_DEPTH();
 
     std::ifstream input{configFilePath};
     if (input.is_open()) {
@@ -44,11 +47,11 @@ Error initialize() {
             if (value == "") continue;
 
             tag = utility::toLower(utility::trim(tag));
-            value = utility::toLower(utility::trim(value));
+            value = utility::trim(value);
 
-            DEBUG_MSG_INDENT("tag: " + tag, 1);
-            DEBUG_MSG_INDENT("value: " + value, 1);
-            DEBUG_LINE_INDENT(1);
+            DEBUG_MSG("tag: " + tag);
+            DEBUG_MSG("value: " + value);
+            DEBUG_LINE();
 
             if (tag == "screenwidth" && utility::isNat(value)) {
                 screenWidth = std::stoi(value);
@@ -60,6 +63,10 @@ Error initialize() {
                 vShaderPath = value;
             } else if (tag == "fshader") {
                 fShaderPath = value;
+            } else if (tag == "vtexshader") {
+                vTexShaderPath = value;
+            } else if (tag == "ftexshader") {
+                fTexShaderPath = value;
             } else if (tag == "vlightshader") {
                 vLightShaderPath = value;
             } else if (tag == "flightshader") {
@@ -72,9 +79,11 @@ Error initialize() {
         input.close();
     } else {
         DEBUG_ERROR("Failed to load config file: " + configFilePath);
+        DEBUG_DEC_DEPTH();
         return Error::CANT_OPEN;
     }
 
+    DEBUG_DEC_DEPTH();
     return Error::OK;
 }
 

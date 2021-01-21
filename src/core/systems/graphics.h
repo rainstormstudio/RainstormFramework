@@ -48,7 +48,7 @@ void useShader(size_t index = 0);
 void unbindShader();
 
 void registerTexture(std::string name, std::string filePath);
-void useTexture(std::string name);
+void useTexture(std::string name, size_t index);
 
 size_t registerLight(glm::vec3 pos, glm::vec3 color);
 void updateLight(size_t id, glm::vec3 pos, glm::vec3 color);
@@ -57,6 +57,7 @@ void applyLightUniforms();
 void applyUniform(const std::string &name, glm::mat4 value);
 void applyUniform(const std::string &name, glm::vec3 value);
 void applyUniform(const std::string &name, float value);
+void applyUniformInt(const std::string &name, int value);
 
 };  // namespace graphics
 

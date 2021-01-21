@@ -20,6 +20,8 @@ namespace config {
 extern std::string configFilePath;
 extern std::string vShaderPath;
 extern std::string fShaderPath;
+extern std::string vTexShaderPath;
+extern std::string fTexShaderPath;
 extern std::string vLightShaderPath;
 extern std::string fLightShaderPath;
 

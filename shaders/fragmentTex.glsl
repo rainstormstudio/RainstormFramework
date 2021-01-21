@@ -7,10 +7,11 @@ in vec3 vNormal;
 
 out vec4 gl_FragColor;
 
-uniform vec3 albedo;
-uniform float metallic;
-uniform float roughness;
-uniform float ao;
+uniform sampler2D albedoMap;
+uniform sampler2D normalMap;
+uniform sampler2D metallicMap;
+uniform sampler2D roughnessMap;
+uniform sampler2D aoMap;
 
 uniform vec3 lightPositions[10];
 uniform vec3 lightColors[10];
@@ -43,6 +44,13 @@ vec3 fresnelSchlick(float cosTheta, vec3 F0) {
 }
 
 void main() {
+  vec3 albedo = pow(texture(albedoMap, vTexCoord).rgb, vec3(2.2f));
+  // vec3 vNormal = texture(normalMap, vTexCoord).rgb;
+  // vNormal = normalize(vNormal * 2.0 - 1.0);
+  float metallic = texture(metallicMap, vTexCoord).r;
+  float roughness = texture(roughnessMap, vTexCoord).r;
+  float ao = texture(aoMap, vTexCoord).r;
+
   vec3 N = normalize(vNormal);
   vec3 V = normalize(viewPosition - vPosition);
 

@@ -60,7 +60,10 @@ void Engine::gameLoop() {
         isRunning = false;
     }
 
+    DEBUG_MSG("initializing manager");
     manager->initialize();
+
+    DEBUG_LINE();
 
     double deltaTime = 0.0;
     double time_a = glfwGetTime();

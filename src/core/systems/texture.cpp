@@ -5,14 +5,6 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "../../thirdParty/stb_image/stb_image.h"
 
-Texture::Texture() {
-    textureID_ = 0;
-    width_ = 0;
-    height_ = 0;
-    bitDepth_ = 0;
-    filePath_ = "";
-}
-
 Texture::Texture(const char* filePath) : filePath_{filePath} {
     textureID_ = 0;
     width_ = 0;
@@ -71,8 +63,8 @@ bool Texture::loadTextureAlpha() {
                     GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width_, height_, 0, GL_RGBA,
-                 GL_UNSIGNED_BYTE, texData);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width_, height_, 0, GL_RGBA8,
+                 GL_UNSIGNED_BYTE, (void*)texData);
     glGenerateMipmap(GL_TEXTURE_2D);
 
     glBindTexture(GL_TEXTURE_2D, 0);
@@ -82,8 +74,8 @@ bool Texture::loadTextureAlpha() {
     return true;
 }
 
-void Texture::use() {
-    glActiveTexture(GL_TEXTURE0);
+void Texture::use(size_t index) {
+    glActiveTexture(GL_TEXTURE0 + index);
     glBindTexture(GL_TEXTURE_2D, textureID_);
 }
 

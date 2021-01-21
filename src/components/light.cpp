@@ -2,6 +2,7 @@
 
 #include "../core/OCcore/object.h"
 #include "../core/systems/graphics.h"
+#include "../debug/debug.h"
 #include "transform.h"
 
 void Light::initialize() {
