@@ -16,7 +16,7 @@ ASSERT(expr) assert expr at run-time
 
 DEBUG_ADD_DEPTH() add one level more indentation for displaying
 
-DEBUG_DEC_DEPTH() decrease on level of indentation
+DEBUG_DEC_DEPTH() decrease one level of indentation
 
 DEBUG_MSG(expr) put expr to standard error
 
