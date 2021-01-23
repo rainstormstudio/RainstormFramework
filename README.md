@@ -167,6 +167,7 @@ Daniel Hongyu Ding
 ### Future Features
 - model importing
 - shadow support
+- GUI
 - multithreading optimization
 - Object Component optimization
 - Crossplatform: Windows
