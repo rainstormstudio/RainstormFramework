@@ -3,6 +3,12 @@
 ## Description
 Rainstorm Framework is a game engine based on OpenGL and uses an Object Component system. The ultimate goal of this engine is to provide a GUI-free but simple-to-use code interface.
 
+## Demo
+![screenshot 1](screenshots/screenshot1.png)
+![screenshot 2](screenshots/screenshot2.png)
+![screenshot 3](screenshots/screenshot3.png)
+![screenshot 4](screenshots/screenshot4.png)
+
 ## Usage
 ### main interface
 ```c++
