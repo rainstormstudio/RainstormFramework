@@ -5,7 +5,7 @@ Rainstorm Framework is a game engine based on OpenGL and uses an Object Componen
 
 ## Usage
 ### main interface
-`
+```
 #include "REngine.h"
 
 class App : public Engine {
@@ -40,9 +40,9 @@ int main() {
 
     return 0;
 }
-`
+```
 ### Object Component system
-`
+```
 // create an object:
 // addObject requires two parameters:
 //     a string for object name
@@ -51,4 +51,4 @@ Object* object = manager->addObject("ObjectName", 0);
 
 // add a component
 object->addComponent<ComponentType>
-`
+```
