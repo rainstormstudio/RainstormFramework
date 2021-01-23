@@ -5,12 +5,12 @@
 
 namespace config {
 std::string configFilePath = "./config/settings.cfg";
-std::string vShaderPath = "./shaders/vertex.glsl";
-std::string fShaderPath = "./shaders/fragment.glsl";
-std::string vTexShaderPath = "./shaders/vertexTex.glsl";
-std::string fTexShaderPath = "./shaders/fragmentTex.glsl";
-std::string vLightShaderPath = "./shaders/light_vertex.glsl";
-std::string fLightShaderPath = "./shaders/light_fragment.glsl";
+std::string vShaderPath = "./assets/shaders/vertex.glsl";
+std::string fShaderPath = "./assets/shaders/fragment.glsl";
+std::string vTexShaderPath = "./assets/shaders/vertexTex.glsl";
+std::string fTexShaderPath = "./assets/shaders/fragmentTex.glsl";
+std::string vLightShaderPath = "./assets/shaders/light_vertex.glsl";
+std::string fLightShaderPath = "./assets/shaders/light_fragment.glsl";
 
 uint32_t screenWidth = 800;
 uint32_t screenHeight = 600;

@@ -1,31 +1,54 @@
 # RainstormFramework
 
 ## Description
+Rainstorm Framework is a game engine based on OpenGL and uses an Object Component system. The ultimate goal of this engine is to provide a GUI-free but simple-to-use code interface.
 
-## Naming Conventions
-### Files
-- c++ source files: *.cpp
-- c source files: *.c
-- c++ header files: *.h
-- c source files: *.h
-- for c++ files, use the name of the main class it contains with all lowercase
-### Code
-- preprocessor macros are all uppercase without leading underscores
-- for acronyms, two letters is uppercase (DD), three or more is lowercase (Pme)
-- all names are CamelCase
-- classes, structs start with a capital letter
-- functions, variables start with a lowercase letter
-- namespaces are all lowercase
-- enum values or constants are all uppercase using underscore to separate words
-- accessors for a variable `foo_` are named `foo()` and `setFoo()`
-- global variables have a `g_` prefix
-- static class variables have a `s_` prefix
-- global constants have a `c_` prefix
-- function prefixes:
-    * compute
-    * find
-    * initialize
-- a number of objects should have a `n` prefix: `nPoints`
-- instance of a class have an `m` prefix
-- the id of an object has a `_id` suffix
-- boolean variables have an `is` prefix
+## Usage
+### main interface
+`
+#include "REngine.h"
+
+class App : public Engine {
+   public:
+    // calls before the game loop
+    bool onCreate() override {
+        ...
+        return true;
+    }
+
+    // calls every frame 
+    // for updating game logic
+    bool onUpdate(double deltaTime) override {
+        ...
+        return true;
+    }
+
+    // calls every frame
+    // for rendering game objects
+    bool onRender(double deltaTime) override {
+        ...
+        return true;
+    }
+};
+
+
+int main() {
+    App app;
+    if (app.initialize()) {
+        app.run();
+    }
+
+    return 0;
+}
+`
+### Object Component system
+`
+// create an object:
+// addObject requires two parameters:
+//     a string for object name
+//     an unsigned integer for layer index
+Object* object = manager->addObject("ObjectName", 0);
+
+// add a component
+object->addComponent<ComponentType>
+`

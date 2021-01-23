@@ -1,7 +1,7 @@
 /**
  * @file includes.h
  * @author Daniel Hongyu Ding
- * @brief This file imports some common includes
+ * @brief This file includes some common libs
  * @version 0.1
  * @date 2021-01-16
  *

@@ -1,7 +1,7 @@
 /**
  * @file REngine.h
  * @author Daniel Hongyu Ding
- * @brief The highest interface for user
+ * @brief The main header file for users
  * @version 0.1
  * @date 2021-01-16
  *

@@ -1,7 +1,7 @@
 /**
  * @file math.h
  * @author Daniel Hongyu Ding
- * @brief This file uses glm for math lib
+ * @brief This file includes glm for math lib
  * @version 0.1
  * @date 2021-01-16
  *

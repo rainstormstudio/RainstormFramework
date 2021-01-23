@@ -4,31 +4,32 @@
  * @brief This file defines the ring buffer
  * @version 0.1
  * @date 2021-01-16
- * 
+ * @ref https://wickedengine.net/2018/11/24/simple-job-system-using-standard-c/
+ *
  * @copyright Copyright (c) 2021
- * 
+ *
  */
 
 #ifndef RS_RING_BUFFER_H
 #define RS_RING_BUFFER_H
 
-#include <thread>
 #include <mutex>
+#include <thread>
 
-template<typename T, size_t size>
+template <typename T, size_t size>
 class RingBuffer {
     T data[size];
     size_t front = 0;
     size_t end = 0;
     std::mutex lock;
 
-public:
+   public:
     /**
      * @brief push an item to the buffer if possible
-     * 
-     * @param item 
-     * @return true 
-     * @return false 
+     *
+     * @param item
+     * @return true
+     * @return false
      */
     inline bool push_back(const T& item) {
         bool isSuccess = false;
@@ -45,10 +46,10 @@ public:
 
     /**
      * @brief get an item if possible
-     * 
-     * @param item 
-     * @return true 
-     * @return false 
+     *
+     * @param item
+     * @return true
+     * @return false
      */
     inline bool pop_front(T& item) {
         bool isSuccess = false;
@@ -64,4 +65,3 @@ public:
 };
 
 #endif
-
